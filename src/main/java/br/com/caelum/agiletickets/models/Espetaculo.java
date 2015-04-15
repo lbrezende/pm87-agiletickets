@@ -104,12 +104,9 @@ public class Espetaculo {
 		
 		for (int i = 0; i <= numeroDeDias; i++) {
 			Sessao sessao = new Sessao();
-			sessao.setTotalIngressos(100);
-			sessao.setIngressosReservados(50);
 			sessao.setInicio(inicio.plusDays(numeroDeDias).toDateTime(horario));
 			this.getSessoes().add(sessao);
 		}
-
 		
 		return sessoes;
 	}
