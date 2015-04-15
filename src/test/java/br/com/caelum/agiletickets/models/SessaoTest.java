@@ -1,5 +1,7 @@
 package br.com.caelum.agiletickets.models;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,6 +39,14 @@ public class SessaoTest {
 		sessao.setTotalIngressos(3);
 		
 		Assert.assertTrue(sessao.podeReservar(3));
+	}
+	
+	@Test
+	public void test() throws Exception {
+		Espetaculo espetaculo = new Espetaculo();
+		//espetaculo.criarSessoes(new LocalDate(), LocalDate fim, LocalTime horario, Periodicidade periodicidade);
+		
+		Assert.assertTrue(true);
 	}
 	
 }
