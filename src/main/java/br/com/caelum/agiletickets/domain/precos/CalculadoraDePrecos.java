@@ -10,26 +10,29 @@ public class CalculadoraDePrecos {
 	public static BigDecimal calcula(Sessao sessao, Integer quantidade) {
 		BigDecimal preco;
 		
-		TipoDeEspetaculo tipo = sessao.getEspetaculo().getTipo();
+
 		Integer totalIngressos = sessao.getTotalIngressos();
 		Integer ingressosReservados = sessao.getIngressosReservados();
-		BigDecimal precoPadraoDaSessao = sessao.getPreco();
 		
-		return calculaPrecoDaSessao(sessao, quantidade, tipo, totalIngressos,ingressosReservados, precoPadraoDaSessao);
+		
+		return calculaPrecoDaSessao(sessao, quantidade, totalIngressos, ingressosReservados);
 	}
 
-	private static BigDecimal calculaPrecoDaSessao(Sessao sessao, Integer quantidade, TipoDeEspetaculo tipo, Integer totalIngressos,
-			Integer ingressosReservados, BigDecimal precoPadraoDaSessao) {
+	private static BigDecimal calculaPrecoDaSessao(Sessao sessao, Integer quantidade, Integer totalIngressos, Integer ingressosReservados) {
 		BigDecimal preco;
+		
+		TipoDeEspetaculo tipo = sessao.getEspetaculo().getTipo();
+		BigDecimal precoPadraoDaSessao = sessao.getPreco();
+		
 		if(tipo.equals(TipoDeEspetaculo.CINEMA) || tipo.equals(TipoDeEspetaculo.SHOW)) {
 			//quando estiver acabando os ingressos... 
-			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.05) { 
+			if(taxaDeIngressosReservados(totalIngressos, ingressosReservados) <= 0.05) { 
 				preco = precoPadraoDaSessao.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.10)));
 			} else {
 				preco = precoPadraoDaSessao;
 			}
 		} else if(tipo.equals(TipoDeEspetaculo.BALLET)) {
-			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.50) { 
+			if(taxaDeIngressosReservados(totalIngressos, ingressosReservados) <= 0.50) { 
 				preco = precoPadraoDaSessao.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.20)));
 			} else {
 				preco = precoPadraoDaSessao;
@@ -39,7 +42,7 @@ public class CalculadoraDePrecos {
 				preco = preco.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.10)));
 			}
 		} else if(tipo.equals(TipoDeEspetaculo.ORQUESTRA)) {
-			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.50) { 
+			if(taxaDeIngressosReservados(totalIngressos, ingressosReservados) <= 0.50) { 
 				preco = precoPadraoDaSessao.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.20)));
 			} else {
 				preco = precoPadraoDaSessao;
@@ -56,8 +59,7 @@ public class CalculadoraDePrecos {
 		return preco.multiply(BigDecimal.valueOf(quantidade));
 	}
 
-	private static double calculaPorcentagemDeIngressosDisponiveis(Integer totalIngressos,
-			Integer ingressosReservados) {
+	private static double taxaDeIngressosReservados(Integer totalIngressos,	Integer ingressosReservados) {
 		return (totalIngressos - ingressosReservados) / totalIngressos.doubleValue();
 	}
 
