@@ -15,6 +15,12 @@ public class CalculadoraDePrecos {
 		Integer ingressosReservados = sessao.getIngressosReservados();
 		BigDecimal precoPadraoDaSessao = sessao.getPreco();
 		
+		return calculaPrecoDaSessao(sessao, quantidade, tipo, totalIngressos,ingressosReservados, precoPadraoDaSessao);
+	}
+
+	private static BigDecimal calculaPrecoDaSessao(Sessao sessao, Integer quantidade, TipoDeEspetaculo tipo, Integer totalIngressos,
+			Integer ingressosReservados, BigDecimal precoPadraoDaSessao) {
+		BigDecimal preco;
 		if(tipo.equals(TipoDeEspetaculo.CINEMA) || tipo.equals(TipoDeEspetaculo.SHOW)) {
 			//quando estiver acabando os ingressos... 
 			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.05) { 
