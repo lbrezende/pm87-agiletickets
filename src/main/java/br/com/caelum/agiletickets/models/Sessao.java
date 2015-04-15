@@ -1,6 +1,7 @@
 package br.com.caelum.agiletickets.models;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.Locale;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 
 @Entity
@@ -25,7 +27,7 @@ public class Sessao {
 
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime inicio;
-
+	
 	private Integer duracaoEmMinutos;
 
 	private Integer totalIngressos = 0;
@@ -33,6 +35,7 @@ public class Sessao {
 	private Integer ingressosReservados = 0;
 
 	private BigDecimal preco;
+
 
 	public Long getId() {
 		return id;
