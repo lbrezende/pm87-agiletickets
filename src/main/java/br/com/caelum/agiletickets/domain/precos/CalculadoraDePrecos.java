@@ -13,37 +13,38 @@ public class CalculadoraDePrecos {
 		TipoDeEspetaculo tipo = sessao.getEspetaculo().getTipo();
 		Integer totalIngressos = sessao.getTotalIngressos();
 		Integer ingressosReservados = sessao.getIngressosReservados();
+		BigDecimal precoPadraoDaSessao = sessao.getPreco();
 		
 		if(tipo.equals(TipoDeEspetaculo.CINEMA) || tipo.equals(TipoDeEspetaculo.SHOW)) {
 			//quando estiver acabando os ingressos... 
 			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.05) { 
-				preco = sessao.getPreco().add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
+				preco = precoPadraoDaSessao.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.10)));
 			} else {
-				preco = sessao.getPreco();
+				preco = precoPadraoDaSessao;
 			}
 		} else if(tipo.equals(TipoDeEspetaculo.BALLET)) {
 			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.50) { 
-				preco = sessao.getPreco().add(sessao.getPreco().multiply(BigDecimal.valueOf(0.20)));
+				preco = precoPadraoDaSessao.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.20)));
 			} else {
-				preco = sessao.getPreco();
+				preco = precoPadraoDaSessao;
 			}
 			
 			if(sessao.getDuracaoEmMinutos() > 60){
-				preco = preco.add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
+				preco = preco.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.10)));
 			}
 		} else if(tipo.equals(TipoDeEspetaculo.ORQUESTRA)) {
 			if(calculaPorcentagemDeIngressosDisponiveis(totalIngressos, ingressosReservados) <= 0.50) { 
-				preco = sessao.getPreco().add(sessao.getPreco().multiply(BigDecimal.valueOf(0.20)));
+				preco = precoPadraoDaSessao.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.20)));
 			} else {
-				preco = sessao.getPreco();
+				preco = precoPadraoDaSessao;
 			}
 
 			if(sessao.getDuracaoEmMinutos() > 60){
-				preco = preco.add(sessao.getPreco().multiply(BigDecimal.valueOf(0.10)));
+				preco = preco.add(precoPadraoDaSessao.multiply(BigDecimal.valueOf(0.10)));
 			}
 		}  else {
 			//nao aplica aumento para teatro (quem vai é pobretão)
-			preco = sessao.getPreco();
+			preco = precoPadraoDaSessao;
 		} 
 
 		return preco.multiply(BigDecimal.valueOf(quantidade));
