@@ -9,17 +9,15 @@ public class CalculadoraDePrecos {
 
 	public static BigDecimal calcula(Sessao sessao, Integer quantidade) {
 		BigDecimal preco;
-		
-
-		Integer totalIngressos = sessao.getTotalIngressos();
-		Integer ingressosReservados = sessao.getIngressosReservados();
-		
-		
-		return calculaPrecoDaSessao(sessao, quantidade, totalIngressos, ingressosReservados);
+				
+		return calculaPrecoDaSessao(sessao, quantidade);
 	}
 
-	private static BigDecimal calculaPrecoDaSessao(Sessao sessao, Integer quantidade, Integer totalIngressos, Integer ingressosReservados) {
+	private static BigDecimal calculaPrecoDaSessao(Sessao sessao, Integer quantidade) {
 		BigDecimal preco;
+		
+		Integer totalIngressos = sessao.getTotalIngressos();
+		Integer ingressosReservados = sessao.getIngressosReservados();
 		
 		TipoDeEspetaculo tipo = sessao.getEspetaculo().getTipo();
 		BigDecimal precoPadraoDaSessao = sessao.getPreco();
