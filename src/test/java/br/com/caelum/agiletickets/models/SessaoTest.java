@@ -42,8 +42,16 @@ public class SessaoTest {
 	}
 	
 	@Test
-	public void test() throws Exception {
-		Espetaculo espetaculo = new Espetaculo();
+	public void periodoDeTresDiasDiariasDeveGerarTresSessoes() throws Exception {
+//		 * - Caso a data de inicio seja 01/01/2010, a data de fim seja 03/01/2010,
+//	     * e a periodicidade seja DIARIA, o algoritmo cria 3 sessoes, uma 
+//	     * para cada dia: 01/01, 02/01 e 03/01.
+		
+	     LocalDate dataInicial =  LocalDate.parse("2010-01-01");
+	     LocalDate dataFinal =  LocalDate.parse("2010-01-03");
+	          
+	     
+		
 		//espetaculo.criarSessoes(new LocalDate(), LocalDate fim, LocalTime horario, Periodicidade periodicidade);
 		
 		Assert.assertTrue(true);
