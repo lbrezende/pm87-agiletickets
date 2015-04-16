@@ -105,7 +105,7 @@ public class Espetaculo {
 		for (int i = 0; i <= numeroDeDias; i++) {
 			Sessao sessao = new Sessao();
 			sessao.setInicio(inicio.plusDays(numeroDeDias).toDateTime(horario));
-			//this.getSessoes().add(sessao);
+			this.getSessoes().add(sessao);
 		}
 		
 		return sessoes;
